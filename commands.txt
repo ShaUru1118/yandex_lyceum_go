@@ -1,0 +1,28 @@
+…or create a new repository on the command line
+    echo "# evefbe" >> README.md
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git branch -M main
+    git remote add origin git@github.com:ShaUru1118/<name_of_repository>
+    git push -u origin mainecho "# evefbe" >> README.md
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git branch -M main
+    git remote add origin git@github.com:ShaUru1118/<name_of_repository>
+    git push -u origin main
+
+
+…or push an existing repository from the command line
+    git remote add origin git@github.com:ShaUru1118/<name_of_repository>
+    git branch -M main
+    git push -u origin main
+
+
+git init
+git status
+git add .
+git status
+git commit -m "<name_of_commit>"
+git push
