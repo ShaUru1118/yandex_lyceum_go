@@ -1,16 +1,18 @@
 package main
 
-import (
-	"errors"
-	"unicode/utf8"
-)
+import "fmt"
 
-var ErrInvalidUTF8 = errors.New("invalid utf8")
+func main() {
+	var n int
+	fmt.Scan(&n)
 
-func GetUTFLength(input []byte) (int, error) {
-	if !utf8.Valid(input) {
-		return 0, ErrInvalidUTF8
+	a, b := 0, 1
+
+	for i := 0; i < 10; i++ {
+		for b < n {
+			a, b = b, a+b
+		}
+		fmt.Println(b)
+		a, b = b, a+b
 	}
-
-	return utf8.RuneCount(input), nil
 }
