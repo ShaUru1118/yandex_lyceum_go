@@ -1,6 +1,10 @@
 package main
 
-import "math"
+import (
+	"math"
+	"sort"
+	"strings"
+)
 
 func CalculateSeriesSum(n int) float64 {
 	s := 0.0
@@ -35,3 +39,58 @@ func CalculateDigitalRoot(n int) int {
 	}
 	return n
 }
+
+func IsPalindrome(input string) bool {
+	// Приведение строки к нижнему регистру и удаление пробелов
+	cleanedInput := strings.ReplaceAll(strings.ToLower(input), " ", "")
+
+	// Проверка палиндрома
+	length := len(cleanedInput)
+	for i := 0; i < length/2; i++ {
+		if cleanedInput[i] != cleanedInput[length-1-i] {
+			return false
+		}
+	}
+	return true
+}
+
+func Permutations(input string) []string {
+	var results []string
+	permuteHelper([]rune(input), 0, len(input)-1, &results)
+	sort.Strings(results) // Сортировка в алфавитном порядке
+	return results
+}
+
+func permuteHelper(s []rune, l, r int, results *[]string) {
+	if l == r {
+		*results = append(*results, string(s))
+	} else {
+		for i := l; i <= r; i++ {
+			s[l], s[i] = s[i], s[l] // обмен символов
+			permuteHelper(s, l+1, r, results)
+			s[l], s[i] = s[i], s[l] // возврат к исходному состоянию
+		}
+	}
+}
+
+func AreAnagrams(str1, str2 string) bool {
+    cleanedStr1 := strings.ToLower(str1)
+    cleanedStr2 := strings.ToLower(str2)
+
+    sortedStr1 := sortString(cleanedStr1)
+    sortedStr2 := sortString(cleanedStr2)
+
+    return sortedStr1 == sortedStr2
+}
+
+func sortString(s string) string {
+    runes := []rune(s)
+    sort.Sort(sortRunes(runes))
+    return string(runes)
+}
+
+type sortRunes []rune
+
+func (s sortRunes) Len() int           { return len(s) }
+func (s sortRunes) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
+func (s sortRunes) Less(i, j int) bool { return s[i] < s[j] }
